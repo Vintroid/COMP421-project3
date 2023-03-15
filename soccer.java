@@ -65,6 +65,7 @@ class soccer {
                         // list info
                         System.out.println("Please enter a country name: ");
                         String country = scanner.nextLine();
+                        //
                         try {
                             String querySQL = "SELECT team_name1,team_name2,date_and_time, round from matches"
                                     + " WHERE NAME =" + country;
@@ -93,6 +94,7 @@ class soccer {
 
                 }
                 case 2: {
+                    //get the date of 3 days after today   
                     java.sql.Date afterdate = new java.sql.Date(Calendar.getInstance().getTime().getTime()+24*60*60*1000*3);
                     try {
                         String querySQL = "select mid,team_name1,team_name2,date_and_time,round from matches where date_and_time <= "+afterdate.toString();
@@ -106,7 +108,7 @@ class soccer {
                             java.sql.Date date = rs.getDate(4);
                             String round = rs.getString(5);
                             System.out.print(mid);
-                            System.out.print(team1+" "+team2+" " +date +" "+ round+"\n");
+                            System.out.print(" "+team1+" "+team2+" " +date +" "+ round+"\n");
                         }
                         
                     } catch (SQLException e) {
@@ -116,6 +118,27 @@ class soccer {
                         System.out.println("Code: " + sqlCode + "  sqlState: " + sqlState);
                         System.out.println(e);
                     }
+                    System.out.println("Please enter the match identifier and the country name OR enter [P] to return to the previous menu");
+                    String str = scanner.nextLine();
+                    if(str !="P" )
+                        {
+                            String[] strs = str.split(" ");
+                            if(strs.length<=1 ||strs.length>2){
+                                    System.out.println("Run input format");
+                            }
+                            else{
+                                String id = strs[0];
+                                String enteredCountry = strs[1];
+                                // QUERY for given id and country;
+                                System.out.println("Possible players not yet selected:");
+                                // Query for remaining players in the team;
+                                System.out.println("Enter the number of the player you want to insert or [P]to go to the previous menu.");
+                                //insert data given list index
+                            }
+                            
+                        }
+                    else
+                        break;
                 }
                 case 3: {
                 }
