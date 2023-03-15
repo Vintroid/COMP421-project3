@@ -1,0 +1,90 @@
+(c) Copyright IBM Corporation 1993,2007
+Command Line Processor for DB2 Client 11.5.8.0
+
+You can issue database manager commands and SQL statements from the command 
+prompt. For example:
+    db2 => connect to sample
+    db2 => bind sample.bnd
+
+For general help, type: ?.
+For command help, type: ? command, where command can be
+the first few keywords of a database manager command. For example:
+ ? CATALOG DATABASE for help on the CATALOG DATABASE command
+ ? CATALOG          for help on all of the CATALOG commands.
+
+To exit db2 interactive mode, type QUIT at the command prompt. Outside 
+interactive mode, all commands must be prefixed with 'db2'.
+To list the current command option settings, type LIST COMMAND OPTIONS.
+
+For more detailed help, refer to the Online Reference Manual.
+
+db2 => db2 => db2 => db2 => db2 => CONNECT TO cs421
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 11.5.8.0
+ SQL authorization ID   = CS421G12...
+ Local database alias   = CS421
+
+
+db2 => db2 => db2 => db2 => db2 => db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO clients (cid,client_name) VALUES (1,'Bob') ,(2, 'Joe') ,(3, 'John') ,(4, 'Bob') ,(5, 'Tony') ,(6,'Shaun') ,(7, 'Mary') ,(8,'Shaun') ,(9, 'Anthony Ian Johnson Jr')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO stadiums (sid,location,sname,capacity) VALUES (1,'Canada','Stade Olympique',1000) ,(2, 'USA','Boston Dome', 2000) ,(3, 'United Kingdom', 'Manchester Stadium', 5000) ,(4, NULL, 'European Border Stadium', NULL) ,(5, 'Italy', 'Firenze Stadia', 6000) ,(6,'Canada','Stade Olympique',NULL)
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO seats (seat_id,sid,seat_location,seat_status) VALUES (1,1,'Stade Olympique','occupied') ,(2,1,'Stade Olympique', 'free') ,(3,1,'Stade Olympique','occupied') ,(4,2,'Boston Dome','occupied') ,(5,3,'Manchester Stadium','occupied') ,(6,3,'Manchester Stadium','occupied') ,(7,3,'Manchester Stadium','occupied') ,(8,4,'European Border Stadium','free') ,(9,4,'European Border Stadium','free') ,(10,5,'Firenze Stadia','occupied') ,(11,6,'Stade Olympique','free')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO teams (country,group) VALUES ('Canada','Group A') ,('USA','Group A') ,('France','Group A') ,('Italy','Group A') ,('Croatia','Group B') ,('United Kingdom','Group B') ,('Sweden','Group B') ,('Germany','Group B')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO associations (aname, url) VALUES ('Canada Association','canasc.ca') ,('USA Soccer','usasoccer.com') ,('EURO Pro','europro.eu') ,('Mia Italia','miaita.it') ,('EU United','euunited.eu') ,('Association football France','frfoot.fr') ,('Mein Association','mascfoot.dt') ,('Nordic Association','nordvpnfoot.sn')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO supervises (aname,country) VALUES ('Canada Association','Canada') ,('USA Soccer','USA') ,('EURO Pro','Croatia') ,('Mia Italia','Italy') ,('EU United','United Kingdom') ,('Association football France','France') ,('Mein Association','Germany') ,('Nordic Association','Sweden')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO members (mname,country,DOB) VALUES ('Christine Sinclair','Canada','1983-01-01') ,('Alyssa Naeher','USA','1988-01-03') ,('Mylene Chavas','France','1998-02-02') ,('Laura Giuliani','Italy','1993-03-03') ,('Zecira Musovic','Sweden','1996-04-05') ,('Merle Frohms','Germany','1995-05-05') ,('Mary Earps','United Kingdom','1993-05-05') ,('Doris Bacic','Croatia','1995-06-06') ,('Vincent Bazelais','Canada','1983-04-21') ,('Ryan Reynolds','Canada','1980-01-24') ,('Jeff Bezos','USA','1964-11-25') ,('Davie504','Italy','1992-12-02') ,('Gianluigi Albertino','Italy','1957-02-12') ,('Jean-Baptiste','France','1975-05-27') ,('Felix Kjelberg','Sweden','1988-07-17') ,('Elior Cuvic','Sweden','1999-05-11') ,('Gordon Ramsey','United Kingdom','1967-12-25') ,('Aleksander Braun','Germany','1986-01-02') ,('Auderey Markel','Germany','1991-05-19') ,('Maxim Klaus','Germany','1992-07-24') ,('Kugi Danvic','Croatia','1975-12-03')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO players (mname,position,shirt_number) VALUES ('Christine Sinclair','Midfielder',12) ,('Alyssa Naeher','Goalkeeper',1) ,('Mylene Chavas','Goalkeeper',1) ,('Laura Giuliani','Goalkeeper',1) ,('Zecira Musovic','Goalkeeper',1) ,('Merle Frohms','Goalkeeper',1) ,('Mary Earps','Goalkeeper',1) ,('Doris Bacic','Goalkeeper',1)
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO coaches (mname,role) VALUES ('Vincent Bazelais','Head Coach') ,('Ryan Reynolds','Supporting Coach') ,('Jeff Bezos','Head Coach') ,('Davie504','Head Coach') ,('Gianluigi Albertino','Head Coach') ,('Jean-Baptiste','Head Coach') ,('Felix Kjelberg','Head Coach') ,('Elior Cuvic','Supporting Coach') ,('Gordon Ramsey','Head Coach') ,('Aleksander Braun','Head Coach') ,('Auderey Markel','Supporting Coach') ,('Maxim Klaus',NULL) ,('Kugi Danvic','Head Coach')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO belongs (mname,country) VALUES ('Christine Sinclair','Canada') ,('Alyssa Naeher','USA') ,('Mylene Chavas','France') ,('Laura Giuliani','Italy') ,('Zecira Musovic','Sweden') ,('Merle Frohms','Germany') ,('Mary Earps','United Kingdom') ,('Doris Bacic','Croatia') ,('Vincent Bazelais','Canada') ,('Ryan Reynolds','Canada') ,('Jeff Bezos','USA') ,('Davie504','Italy') ,('Gianluigi Albertino','Italy') ,('Jean-Baptiste','France') ,('Felix Kjelberg','Sweden') ,('Elior Cuvic','Sweden') ,('Gordon Ramsey','United Kingdom') ,('Aleksander Braun','Germany') ,('Auderey Markel','Germany') ,('Maxim Klaus','Germany') ,('Kugi Danvic','Croatia')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO matches (mid,round,date_and_time,team_name1,team_name2,lenghth) VALUES (1,'Knockout Round','2023-03-15','Canada','USA',94) ,(2,'Knockout Round','2023-03-16','Italy','France',92) ,(3,'Knockout Round','2023-05-15','Canada','Italy',90) ,(4,'Knockout Round','2023-05-17','USA','France',95) ,(5,'Knockout Round','2023-05-18','Canada','France',90) ,(6,'Knockout Round','2023-05-20','USA','Italy',99) ,(7,'Knockout Round','2023-05-11','Germany','Croatia',92) ,(8,'Knockout Round','2023-05-13','United Kingdom','Sweden',93) ,(9,'Knockout Round','2023-03-17','Germany','Sweden',96) ,(10,'Knockout Round','2023-05-19','United Kingdom','Croatia',91) ,(11,'Knockout Round','2023-05-21','Sweden','Croatia',101) ,(12,'Knockout Round','2023-05-23','Germany','United Kingdom',90) ,(13,'Semifinals','2023-06-10','Canada','Germany',120) ,(14,'Semifinals','2023-06-17','France','Croatia',92) ,(15,'Loser Finals','2023-06-24','Germany','France',135) ,(16,'Grand Finals','2023-07-01','Canada','Croatia',93)
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO referees (rname,years_of_experience,country) VALUES ('Ref The Immortal',9999,NULL) ,('Jacques Portman',23,'USA') ,('Nosuke Yamashita',13,'Japan') ,('Henry the 423rd',10,'United Kingdom') ,('Arturo Ramirez',26,'Peru')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO oversees (rname,mid,role) VALUES ('Ref The Immortal',1,'Head Referee') ,('Ref The Immortal',2,'Head Referee') ,('Ref The Immortal',3,'Head Referee') ,('Ref The Immortal',4,'Head Referee') ,('Ref The Immortal',5,'Head Referee') ,('Ref The Immortal',6,'Head Referee') ,('Ref The Immortal',7,'Head Referee') ,('Ref The Immortal',8,'Head Referee') ,('Ref The Immortal',9,'Head Referee') ,('Ref The Immortal',10,'Head Referee') ,('Ref The Immortal',11,'Head Referee') ,('Ref The Immortal',12,'Head Referee') ,('Ref The Immortal',13,'Head Referee') ,('Ref The Immortal',14,'Head Referee') ,('Ref The Immortal',15,'Head Referee') ,('Ref The Immortal',16,'Head Referee') ,('Arturo Ramirez',15,'Supporting Referee')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO hosts (sid,mid) VALUES (1,1) ,(2,2) ,(3,3) ,(5,4) ,(6,5) ,(1,6) ,(2,7) ,(3,8) ,(5,9) ,(6,10) ,(1,11) ,(2,12) ,(3,13) ,(5,14) ,(6,15) ,(1,16)
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO tickets (tid,seat_id,sid,mid,price) VALUES (1,1,1,1,250) ,(2,3,1,16,510) ,(3,5,3,13,360) ,(4,6,3,13,380) ,(5,7,3,13,320) ,(6,10,5,9,170) ,(7,3,1,1,300) ,(8,4,2,2,230)
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO bookings (tid,cid,booking_date) VALUES (1,1,'2023-04-02') ,(2,2,'2023-06-22') ,(3,2,'2023-05-16') ,(4,4,'2023-05-19') ,(5,5,'2023-05-15') ,(6,8,'2023-04-28') ,(7,6,'2023-02-26') ,(8,7,'2023-02-19')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO plays (mname,mid,minute_in,minute_out,position,yellow_cards,red_cards) VALUES ('Christine Sinclair',1,0,30,'Midfielder',1,1) ,('Christine Sinclair',3,0,45,'Midfielder',1,1) ,('Christine Sinclair',5,50,90,'Midfielder',NULL,NULL) ,('Christine Sinclair',13,0,90,'Midfielder',NULL,NULL) ,('Christine Sinclair',16,60,93,'Midfielder',NULL,NULL) ,('Alyssa Naeher',1,0,94,'Goalkeeper',1,1) ,('Alyssa Naeher',4,0,95,'Goalkeeper',NULL,NULL) ,('Alyssa Naeher',6,0,99,'Goalkeeper',NULL,NULL) ,('Mylene Chavas',2,0,92,'Goalkeeper',NULL,NULL) ,('Mylene Chavas',4,0,95,'Goalkeeper',NULL,NULL) ,('Mylene Chavas',5,0,90,'Goalkeeper',NULL,NULL) ,('Mylene Chavas',14,0,92,'Goalkeeper',NULL,NULL) ,('Mylene Chavas',15,0,135,'Goalkeeper',NULL,NULL) ,('Laura Giuliani',2,0,92,'Goalkeeper',NULL,NULL) ,('Laura Giuliani',3,0,90,'Goalkeeper',NULL,NULL) ,('Laura Giuliani',6,0,99,'Goalkeeper',NULL,NULL) ,('Zecira Musovic',8,0,93,'Goalkeeper',NULL,NULL) ,('Zecira Musovic',9,0,96,'Goalkeeper',NULL,NULL) ,('Zecira Musovic',11,0,101,'Goalkeeper',NULL,NULL) ,('Merle Frohms',7,0,92,'Goalkeeper',NULL,NULL) ,('Merle Frohms',9,0,96,'Goalkeeper',NULL,NULL) ,('Merle Frohms',12,0,90,'Goalkeeper',NULL,NULL) ,('Merle Frohms',13,0,120,'Goalkeeper',NULL,NULL) ,('Merle Frohms',15,0,135,'Goalkeeper',NULL,NULL) ,('Mary Earps',8,0,93,'Goalkeeper',NULL,NULL) ,('Mary Earps',10,0,91,'Goalkeeper',NULL,NULL) ,('Mary Earps',12,0,90,'Goalkeeper',NULL,NULL) ,('Doris Bacic',7,0,92,'Goalkeeper',NULL,NULL) ,('Doris Bacic',10,0,91,'Goalkeeper',NULL,NULL) ,('Doris Bacic',11,0,101,'Goalkeeper',NULL,NULL) ,('Doris Bacic',14,0,92,'Goalkeeper',NULL,NULL) ,('Doris Bacic',16,0,93,'Goalkeeper',NULL,NULL)
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO goals (occurence,mid,time,goal_type,country) VALUES ('first',1,25,'playtime','Canada') ,('first',2,70,'playtime','France') ,('first',3,8,'playtime','Canada') ,('first',4,60,'playtime','France') ,('first',9,32,'playtime','Germany') ,('first',10,83,'playtime','Croatia') ,('first',11,48,'playtime','Croatia') ,('first',12,16,'playtime','Germany') ,('first',13,120,'penalty','Canada') ,('first',14,67,'playtime','Croatia') ,('second',14,75,'playtime','Croatia') ,('third',14,87,'playtime','Croatia') ,('first',15,135,'penalty','Germany') ,('first',16,92,'playtime','Canada')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO happens (occurence,mid,country) VALUES ('first',1,'Canada') ,('first',2,'France') ,('first',3,'Canada') ,('first',4,'France') ,('first',9,'Germany') ,('first',10,'Croatia') ,('first',11,'Croatia') ,('first',12,'Germany') ,('first',13,'Canada') ,('first',14,'Croatia') ,('second',14,'Croatia') ,('third',14,'Croatia') ,('first',15,'Germany') ,('first',16,'Canada')
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => db2 (cont.) => INSERT INTO scores (mname,occurence,mid) VALUES ('Christine Sinclair','first',1) ,('Mylene Chavas','first',2) ,('Christine Sinclair','first',3) ,('Mylene Chavas','first',4) ,('Merle Frohms','first',9) ,('Doris Bacic','first',10) ,('Doris Bacic','first',11) ,('Merle Frohms','first',12) ,('Christine Sinclair','first',13) ,('Doris Bacic','first',14) ,('Doris Bacic','second',14) ,('Doris Bacic','third',14) ,('Merle Frohms','first',15) ,('Christine Sinclair','first',16)
+DB20000I  The SQL command completed successfully.
+
+db2 => db2 => 
