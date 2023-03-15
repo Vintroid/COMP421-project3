@@ -60,10 +60,12 @@ class soccer {
         Statement statement = con.createStatement();
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        boolean chance = true;
+        int freeticket =0;
         while (running) {
 
             System.out.print(
-                    "Soccer Main Menu\n    1. List information of matches of a country\n    2. Insert initial player information for a match\n    3. For you to design\n    4. Exit application\n Please Enter Your Option: ");
+                    "Soccer Main Menu\n    1. List information of matches of a country\n    2. Insert initial player information for a match\n    3. Get a FREE TICKET\n    4. Exit application\n Please Enter Your Option: ");
             int c = scanner.nextInt();
             scanner.nextLine();
             if (c == 1) {
@@ -250,9 +252,9 @@ class soccer {
                 }
             } else if (c == 3) {
                 
-                boolean chance = true;
-                if (chance) {
-                    System.out.println("It is your lucky day!!!!!! You just got a free ticket ");
+                
+                if (chance && freeticket ==0) {
+                    System.out.println("\n!!!!!!!!It is your lucky day!!!!!!!! You just got a free ticket\n ");
                     java.sql.Date afterdate = new java.sql.Date(
                             Calendar.getInstance().getTime().getTime());
                             Map<Integer, ArrayList<String>> amap = new HashMap<>();
@@ -287,9 +289,9 @@ class soccer {
                         System.out.println("Code: " + sqlCode + "  sqlState: " + sqlState);
                         System.out.println(e);
                     }
-                    System.out.println("Here are all the matches avalible for selection. ");
+                    System.out.println("\n\nHere are all the matches avalible for selection. \n............................");
                     System.out.println(
-                            "Please select which matched you would like to watch or press[P] to give up this free ticket");
+                            "Please select which matched you would like to watch or press [P] to give up this free ticket");
                     String str = scanner.nextLine();
                     if (!str.equals("P")) {
                         int a = Integer.parseInt(str);
@@ -377,11 +379,12 @@ class soccer {
                         //insert new tickets
                         try {
                             String ins = " insert into seats VALUES("+maxseatsid+","+sid+",'"+sname+"',"+"'occupied'"+")";
+                            statement.executeUpdate(ins);
                             String insertSQL = "INSERT INTO tickets VALUES ("+maxtid+","+maxseatsid+","+sid+","+tmp.get(0)+",0)";
                             statement.executeUpdate(insertSQL);
                             System.out.println("Match: "+tmp.get(1)+" against "+tmp.get(2) +" in Statium " + sname +"located in "+location+"on day " +tmp.get(3));
                             System.out.println(" You ticket number: "+maxtid +" seat_number: " + maxseatsid);
-                            System.out.println("Have a nice day, redirecting to Main Menu");
+                            System.out.println("Have a nice day, redirecting to Main Menu\n..............................\n\n=============");
                         } catch (SQLException e) {
                             sqlCode = e.getErrorCode(); // Get SQLCODE
                             sqlState = e.getSQLState(); // Get SQLSTATE
@@ -393,7 +396,9 @@ class soccer {
                         }
                     } else
                         chance = false;
-                } else
+                } else if(chance && freeticket>0)
+                    System.out.println("No more free tikets!");
+                else 
                     System.out.println("You had your chance! Now you will not have any free tickets!");
 
             } else if (c == 4)
@@ -402,7 +407,4 @@ class soccer {
         statement.close();
         con.close();
     }
-
-    
-
 }
