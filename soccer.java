@@ -1,6 +1,12 @@
 import java.sql.*;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+
+import javax.swing.text.StyledEditorKit;
+
+import java.util.ArrayList;
 
 class soccer {
 
@@ -138,8 +144,11 @@ class soccer {
                         String id = strs[0];
                         String enteredCountry = strs[1];
                         // QUERY for given id and country;
+                        int max = 3;
+                        int numofplayer = 0;
                         try {
-                            String querySQL = "SELECT M.mname,shirt_number,PL.position,minute_in,minute_out,yellow_cards,red_cards FROM members M, players P, plays PL WHERE P.mname = PL.mname AND  P.mname = M.mname AND PL.mid = "+id +" AND M.country = '"+enteredCountry+"';";
+                            String querySQL = "SELECT M.mname,shirt_number,PL.position,minute_in,minute_out,yellow_cards,red_cards FROM members M, players P, plays PL WHERE P.mname = PL.mname AND  P.mname = M.mname AND PL.mid = "
+                                    + id + " AND M.country = '" + enteredCountry + "';";
                             java.sql.ResultSet rs = statement.executeQuery(querySQL);
 
                             while (rs.next()) {
@@ -148,9 +157,11 @@ class soccer {
                                 String position = rs.getString(3);
                                 String minin = rs.getString(4);
                                 String minout = rs.getString(5);
-                                String yellow_cards= rs.getString(6);
+                                String yellow_cards = rs.getString(6);
                                 String red_cards = rs.getString(7);
-                                System.out.println(mname+" "+sn+" "+ position+" from minute "+minin+" to minute "+minout+" yellow: "+yellow_cards+" red: "+red_cards);
+                                System.out.println(mname + " " + sn + " " + position + " from minute " + minin
+                                        + " to minute " + minout + " yellow: " + yellow_cards + " red: " + red_cards);
+                                numofplayer++;
                             }
                         } catch (SQLException e) {
                             sqlCode = e.getErrorCode(); // Get SQLCODE
@@ -163,13 +174,228 @@ class soccer {
                         }
                         System.out.println("Possible players not yet selected:");
                         // Query for remaining players in the team;
-                        System.out.println(
-                                "Enter the number of the player you want to insert or [P]to go to the previous menu.");
-                        // insert data given list index
+                        Map<Integer, ArrayList<String>> map = new HashMap<>();
+                        try {
+                            String querySQL = "SELECT M.mname,shirt_number,position FROM members M, players P WHERE M.country = '"
+                                    + enteredCountry
+                                    + "' AND M.mname = P.mname EXCEPT SELECT M.mname,shirt_number,P.position FROM members M, players P, plays PL WHERE M.country = '"
+                                    + enteredCountry + "' AND M.mname = P.mname AND P.mname = PL.mname AND PL.mid ="
+                                    + id;
+                            java.sql.ResultSet rs = statement.executeQuery(querySQL);
+                            int counter = 1;
+                            while (rs.next()) {
+                                String mname = rs.getString(1);
+                                String sn = rs.getString(2);
+                                String position = rs.getString(3);
+                                System.out.println(counter + ". " + mname + " " + sn + " " + position);
+                                ArrayList<String> ary = new ArrayList<>();
+                                ary.add(mname);
+                                ary.add(sn);
+                                ary.add(position);
+                                map.put(counter, ary);
+                                counter++;
+                            }
+                        } catch (SQLException e) {
+                            sqlCode = e.getErrorCode(); // Get SQLCODE
+                            sqlState = e.getSQLState(); // Get SQLSTATE
+
+                            // Your code to handle errors comes here;
+                            // something more meaningful than a print would be good
+                            System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
+                            System.out.println(e);
+                        }
+                        boolean add = true;
+                        while (add) {
+                            if (numofplayer <= 3) {
+                                System.out.println(
+                                        "Enter the number of the player you want to insert or [P]to go to the previous menu.");
+                                // insert data given list index
+
+                                String st = scanner.nextLine();
+                                if (!st.equals("P")) {
+                                    int i = Integer.parseInt(st);
+                                    ArrayList<String> tmp = map.get(i);
+
+                                    try {
+                                        // "INSERT INTO plays VALUES ('name',"+id+",0,NULL,'id',0,0)";
+                                        String insertSQL = "INSERT INTO plays VALUES ('" + tmp.get(0) + "'," + id
+                                                + ",0,NULL,'" + tmp.get(2) + "',0,0)";
+                                        System.out.println(
+                                                tmp.get(0) + " will now play as " + tmp.get(2) + " in match " + id);
+                                        statement.executeUpdate(insertSQL);
+                                        numofplayer++;
+                                    } catch (SQLException e) {
+                                        sqlCode = e.getErrorCode(); // Get SQLCODE
+                                        sqlState = e.getSQLState(); // Get SQLSTATE
+
+                                        // Your code to handle errors comes here;
+                                        // something more meaningful than a print would be good
+                                        System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
+                                        System.out.println(e);
+                                    }
+                                } else {
+                                    add = false;
+                                }
+
+                            } else {
+                                add = false;
+                                System.out.println(
+                                        "You have reached the team limit, cannot add more players, returning to main menu");
+                            }
+
+                        }
+
                     }
 
                 }
             } else if (c == 3) {
+                
+                boolean chance = true;
+                if (chance) {
+                    System.out.println("It is your lucky day!!!!!! You just got a free ticket ");
+                    java.sql.Date afterdate = new java.sql.Date(
+                            Calendar.getInstance().getTime().getTime());
+                            Map<Integer, ArrayList<String>> amap = new HashMap<>();
+                    try {
+                        String querySQL = "select mid,team_name1,team_name2,date_and_time,round from matches where date_and_time >= '"
+                                + afterdate + "'";
+
+                        java.sql.ResultSet rs = statement.executeQuery(querySQL);
+                        System.out.println("Matches: ");
+                        int counter = 1;
+                        
+                        while (rs.next()) {
+                            String mid = rs.getString(1);
+                            String team1 = rs.getString(2);
+                            String team2 = rs.getString(3);
+                            java.sql.Date date = rs.getDate(4);
+                            String round = rs.getString(5);
+                            System.out.print(counter + ". " + team1 + " " + team2 + " " + date + " " + round + "\n");
+                            ArrayList<String> ary = new ArrayList<>();
+                            ary.add(mid);
+                            ary.add(team1);
+                            ary.add(team2);
+                            ary.add(date.toString());
+                            amap.put(counter, ary);
+                            counter++;
+                        }
+
+                    } catch (SQLException e) {
+                        sqlCode = e.getErrorCode(); // Get SQLCODE
+                        sqlState = e.getSQLState(); // Get SQLSTATE
+
+                        System.out.println("Code: " + sqlCode + "  sqlState: " + sqlState);
+                        System.out.println(e);
+                    }
+                    System.out.println("Here are all the matches avalible for selection. ");
+                    System.out.println(
+                            "Please select which matched you would like to watch or press[P] to give up this free ticket");
+                    String str = scanner.nextLine();
+                    if (!str.equals("P")) {
+                        int a = Integer.parseInt(str);
+                        ArrayList<String> tmp = amap.get(a);
+                        int maxseatsid =0;
+                        int sid =0;
+                        int maxtid=0;
+                        //get max seat_id
+                        try {
+                            String querySQL = "select max(seat_id) from seats";
+                            java.sql.ResultSet rs = statement.executeQuery(querySQL);
+                            if(rs.next()){
+                                maxseatsid = rs.getInt(1)+1;
+                                //System.out.println("seat id done");
+                            }
+                            
+                        } catch (SQLException e) {
+                            sqlCode = e.getErrorCode(); // Get SQLCODE
+                            sqlState = e.getSQLState(); // Get SQLSTATE
+
+                            // Your code to handle errors comes here;
+                            // something more meaningful than a print would be good
+                            System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
+                            System.out.println(e);
+                        }
+                        // get sid
+                        try {
+                            String querySQL = "select sid from hosts where mid = "+tmp.get(0);
+                            java.sql.ResultSet rs = statement.executeQuery(querySQL);
+                            if(rs.next()){
+                                sid = rs.getInt(1);
+                                //System.out.println("sid done");
+                            }
+                           
+                            
+                        } catch (SQLException e) {
+                            sqlCode = e.getErrorCode(); // Get SQLCODE
+                            sqlState = e.getSQLState(); // Get SQLSTATE
+
+                            // Your code to handle errors comes here;
+                            // something more meaningful than a print would be good
+                            System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
+                            System.out.println(e);
+                        }
+                        String location = null; String sname = null;
+                        //get stadiums name and location
+                        try {
+                            String querySQL = "select location,sname from stadiums where sid = "+sid;
+                            java.sql.ResultSet rs = statement.executeQuery(querySQL);
+                            if(rs.next()){
+
+                            
+                            location = rs.getString(1);
+                            sname = rs.getString(2);
+                            //System.out.println("statdiums done");
+                            } 
+                        } catch (SQLException e) {
+                            sqlCode = e.getErrorCode(); // Get SQLCODE
+                            sqlState = e.getSQLState(); // Get SQLSTATE
+
+                            // Your code to handle errors comes here;
+                            // something more meaningful than a print would be good
+                            System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
+                            System.out.println(e);
+                        }
+                        //get max tid
+                        try {
+                            String querySQL = "select max(tid) from tickets";
+                            java.sql.ResultSet rs = statement.executeQuery(querySQL);
+                            if(rs.next()){
+                                maxtid = rs.getInt(1)+1;
+                                //System.out.println("tid done");
+                            }
+                            
+                        } catch (SQLException e) {
+                            sqlCode = e.getErrorCode(); // Get SQLCODE
+                            sqlState = e.getSQLState(); // Get SQLSTATE
+
+                            // Your code to handle errors comes here;
+                            // something more meaningful than a print would be good
+                            System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
+                            System.out.println(e);
+                        }
+
+                        //insert new tickets
+                        try {
+                            String ins = " insert into seats VALUES("+maxseatsid+","+sid+",'"+sname+"',"+"'occupied'"+")";
+                            String insertSQL = "INSERT INTO tickets VALUES ("+maxtid+","+maxseatsid+","+sid+","+tmp.get(0)+",0)";
+                            statement.executeUpdate(insertSQL);
+                            System.out.println("Match: "+tmp.get(1)+" against "+tmp.get(2) +" in Statium " + sname +"located in "+location+"on day " +tmp.get(3));
+                            System.out.println(" You ticket number: "+maxtid +" seat_number: " + maxseatsid);
+                            System.out.println("Have a nice day, redirecting to Main Menu");
+                        } catch (SQLException e) {
+                            sqlCode = e.getErrorCode(); // Get SQLCODE
+                            sqlState = e.getSQLState(); // Get SQLSTATE
+
+                            // Your code to handle errors comes here;
+                            // something more meaningful than a print would be good
+                            System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
+                            System.out.println(e);
+                        }
+                    } else
+                        chance = false;
+                } else
+                    System.out.println("You had your chance! Now you will not have any free tickets!");
+
             } else if (c == 4)
                 running = false;
         }
@@ -177,110 +403,6 @@ class soccer {
         con.close();
     }
 
-    // // Creating a table
-    // try
-    // {
-    // String createSQL = "CREATE TABLE " + tableName + " (id INTEGER, name VARCHAR
-    // (25)) ";
-    // System.out.println (createSQL ) ;
-    // statement.executeUpdate (createSQL ) ;
-    // System.out.println ("DONE");
-    // }
-    // catch (SQLException e)
-    // {
-    // sqlCode = e.getErrorCode(); // Get SQLCODE
-    // sqlState = e.getSQLState(); // Get SQLSTATE
-    //
-    // // Your code to handle errors comes here;
-    // // something more meaningful than a print would be good
-    // System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
-    // System.out.println(e);
-    // }
-    //
-    // // Inserting Data into the table
-    // try
-    // {
-    // String insertSQL = "INSERT INTO " + tableName + " VALUES ( 1 , \'Vicki\' ) "
-    // ;
-    // System.out.println ( insertSQL ) ;
-    // statement.executeUpdate ( insertSQL ) ;
-    // System.out.println ( "DONE" ) ;
-    //
-    // insertSQL = "INSERT INTO " + tableName + " VALUES ( 2 , \'Vera\' ) " ;
-    // System.out.println ( insertSQL ) ;
-    // statement.executeUpdate ( insertSQL ) ;
-    // System.out.println ( "DONE" ) ;
-    // insertSQL = "INSERT INTO " + tableName + " VALUES ( 3 , \'Franca\' ) " ;
-    // System.out.println ( insertSQL ) ;
-    // statement.executeUpdate ( insertSQL ) ;
-    // System.out.println ( "DONE" ) ;
-    //
-    // }
-    // catch (SQLException e)
-    // {
-    // sqlCode = e.getErrorCode(); // Get SQLCODE
-    // sqlState = e.getSQLState(); // Get SQLSTATE
-    //
-    // // Your code to handle errors comes here;
-    // // something more meaningful than a print would be good
-    // System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
-    // System.out.println(e);
-    // }
-    //
-    // // Querying a table
-    // try
-    // {
-    // String querySQL = "SELECT id, name from " + tableName + " WHERE NAME =
-    // \'Vicki\'";
-    // System.out.println (querySQL) ;
-    // java.sql.ResultSet rs = statement.executeQuery ( querySQL ) ;
-    //
-    // while ( rs.next ( ) )
-    // {
-    // int id = rs.getInt ( 1 ) ;
-    // String name = rs.getString (2);
-    // System.out.println ("id: " + id);
-    // System.out.println ("name: " + name);
-    // }
-    // System.out.println ("DONE");
-    // }
-    // catch (SQLException e)
-    // {
-    // sqlCode = e.getErrorCode(); // Get SQLCODE
-    // sqlState = e.getSQLState(); // Get SQLSTATE
-    //
-    // // Your code to handle errors comes here;
-    // // something more meaningful than a print would be good
-    // System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
-    // System.out.println(e);
-    // }
-    //
-    // //Updating a table
-    // try
-    // {
-    // String updateSQL = "UPDATE " + tableName + " SET NAME = \'Mimi\' WHERE id =
-    // 3";
-    // System.out.println(updateSQL);
-    // statement.executeUpdate(updateSQL);
-    // System.out.println("DONE");
-    //
-    // // Dropping a table
-    // String dropSQL = "DROP TABLE " + tableName;
-    // System.out.println ( dropSQL ) ;
-    // statement.executeUpdate ( dropSQL ) ;
-    // System.out.println ("DONE");
-    // }
-    // catch (SQLException e)
-    // {
-    // sqlCode = e.getErrorCode(); // Get SQLCODE
-    // sqlState = e.getSQLState(); // Get SQLSTATE
-    //
-    // // Your code to handle errors comes here;
-    // // something more meaningful than a print would be good
-    // System.out.println("Code: " + sqlCode + " sqlState: " + sqlState);
-    // System.out.println(e);
-    // }
-
-    // Finally but importantly close the statement and connection
+    
 
 }
