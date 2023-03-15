@@ -72,6 +72,9 @@ INSERT INTO supervises (aname,country) VALUES
 ;
 INSERT INTO members (mname,country,DOB) VALUES
 ('Christine Sinclair','Canada','1983-01-01')
+,('Shila Nair','Canada','1987-01-01')
+,('Abigail Rutherford','Canada','1996-03-03')
+,('Amy Nelson','Canada','1992-04-04')
 ,('Alyssa Naeher','USA','1988-01-03')
 ,('Mylene Chavas','France','1998-02-02')
 ,('Laura Giuliani','Italy','1993-03-03')
@@ -95,6 +98,9 @@ INSERT INTO members (mname,country,DOB) VALUES
 ;
 INSERT INTO players (mname,position,shirt_number) VALUES
 ('Christine Sinclair','Midfielder',12)
+,('Shila Nair','Goalkeeper',1)
+,('Abigail Rutherford','Attacker',26)
+,('Amy Nelson','Defender',2)
 ,('Alyssa Naeher','Goalkeeper',1)
 ,('Mylene Chavas','Goalkeeper',1)
 ,('Laura Giuliani','Goalkeeper',1)
@@ -120,6 +126,9 @@ INSERT INTO coaches (mname,role) VALUES
 ;
 INSERT INTO belongs (mname,country) VALUES
 ('Christine Sinclair','Canada')
+,('Shila Nair','Canada')
+,('Abigail Rutherford','Canada')
+,('Amy Nelson','Canada')
 ,('Alyssa Naeher','USA')
 ,('Mylene Chavas','France')
 ,('Laura Giuliani','Italy')

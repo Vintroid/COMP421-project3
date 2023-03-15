@@ -27,7 +27,7 @@ create table Oversees (rname varchar(30) not null ,mid integer not null,role var
 create table Hosts(sid integer not null,mid integer not null,primary key(sid, mid),foreign key(sid) references Stadiums,foreign key(mid) references Matches);
 create table Tickets(tid integer not null, seat_id integer not null,sid integer not null,mid integer, price integer not null, primary key (tid),foreign key(seat_id,sid) references Seats,foreign key(mid) references Matches);
 create table Bookings(tid integer not null,cid integer not null,booking_date date, primary key(tid,cid),foreign key(cid) references Clients,foreign key (tid) references Tickets);
-create table Plays(mname varchar(30) not null,mid integer not null,minute_in integer not null,minute_out integer not null,position varchar(30) not null ,yellow_cards int,red_cards int,primary key(mname,mid),foreign key(mid) references Matches,foreign key(mname) references Players);
+create table Plays(mname varchar(30) not null,mid integer not null,minute_in integer not null,minute_out integer,position varchar(30) not null ,yellow_cards int,red_cards int,primary key(mname,mid),foreign key(mid) references Matches,foreign key(mname) references Players);
 create table Goals(occurence varchar(30) not null,mid integer not null ,time integer,goal_type varchar(30) not null,country varchar(30) not null,primary key(occurence,mid),foreign key(mid) references Matches);
 
 create table Scores(mname varchar(30) not null,occurence varchar(30) not null,mid integer not null,foreign key(mname) references Members,foreign key(occurence,mid) references Goals);
