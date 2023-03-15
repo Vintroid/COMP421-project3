@@ -21,7 +21,7 @@ create table Members(mname varchar(30) not null,country varchar(30) not null,DOB
 create table Coaches(mname varchar(30) not null, role varchar(30), primary key(mname),foreign key(mname) references Members);
 create table Players(mname varchar(30) not null, position varchar(30),shirt_number integer not null,primary key(mname),foreign key(mname) references Members);
 create table Belongs(mname varchar(30) not null,country varchar(30) not null,primary key(mname,country),foreign key(mname) references Members,foreign key (country) references Teams);
-create table Matches(mid integer not null, round varchar(30),date_and_time datetime,team_name1 varchar(30),team_name2 varchar(30),lenghth integer,primary key(mid));
+create table Matches(mid integer not null, round varchar(30),date_and_time datetime,team_name1 varchar(30),team_name2 varchar(30),lenghth integer,team1_goals integer,team2_goals integer,primary key(mid));
 create table Referees(rname varchar(30) not null, years_of_experience integer,country varchar(30),primary key(rname));
 create table Oversees (rname varchar(30) not null ,mid integer not null,role varchar(30),primary key(rname,mid),foreign key(rname) references Referees,foreign key(mid) references Matches);
 create table Hosts(sid integer not null,mid integer not null,primary key(sid, mid),foreign key(sid) references Stadiums,foreign key(mid) references Matches);
